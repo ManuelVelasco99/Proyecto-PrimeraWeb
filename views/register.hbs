@@ -2,7 +2,7 @@
             <h2 class="text-center">Registro</h2>
             <div class="row justify-content-center mt-3">
                 <div class="col-6">
-                    <form action="#" method="POST">
+                    <form action="/register/create" method="POST">
                         <div class="form-group">
                             <label for="nombre">Nombre <span class="text-danger">*</span></label>
                             <input 
@@ -57,7 +57,7 @@
                                 class="form-control"            
                             />
                         </div>
-                        
+                        {{!-- 
                         <div class="form-group">
                             <label for="fecha-nac">Fecha de nacimiento <span class="text-danger">*</span></label>
                             <input 
@@ -106,7 +106,7 @@
                                 class="form-control"                           
                             />
                         </div>
-
+                        !--}}
                         <div class="text-center">
 
                         <button type="sumbit" class="btn btn-primary btn-lg mt-2">Registrarme</button>
@@ -116,3 +116,4 @@
                 </div>
             </div>
         </section>
+        <p>{{message}}</p>
