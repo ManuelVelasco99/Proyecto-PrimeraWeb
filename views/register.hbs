@@ -29,7 +29,7 @@
                             <label for="usuario">Usuario <span class="text-danger">*</span></label>
                             <input 
                                 type="text" 
-                                name="usuario" 
+                                name="nombreUsuario" 
                                 id="usuario"
                                 class="form-control"                                
                                 requiered
@@ -40,8 +40,8 @@
                             <label for="email">E-mail <span class="text-danger">*</span></label>
                             <input 
                                 type="email" 
-                                name="email" 
-                                id="email"
+                                name="mail" 
+                                id="mail"
                                 required
                                 class="form-control"                       
                             />
@@ -51,19 +51,18 @@
                             <label for="contrasenia">Contraseña <span class="text-danger">*</span></label>
                             <input 
                                 type="password" 
-                                name="contrasenia" 
-                                id="contrasenia"
+                                name="password" 
+                                id="password"
                                 required
                                 class="form-control"            
                             />
                         </div>
-                        {{!-- 
                         <div class="form-group">
                             <label for="fecha-nac">Fecha de nacimiento <span class="text-danger">*</span></label>
                             <input 
                                 type="date" 
-                                name="fecha-nac"    
-                                id="fecha-nac"
+                                name="fechaNacimiento"    
+                                id="fechaNacimiento"
                                 required
                                 class="form-control"
                             />
@@ -76,21 +75,24 @@
                             <input 
                                 type="radio" 
                                 name="sexo" 
-                                id="sexo"        
+                                id="sexo"   
+                                value="Hombre"     
                                 required
                             />
                             <label for="sexo" class="mr-2">Hombre</label>
                             <input 
                                 type="radio" 
                                 name="sexo" 
-                                id="sexo"        
+                                id="sexo"    
+                                value="Mujer"    
                                 required
                             />
                             <label for="sexo" class="mr-2">Mujer</label>
                             <input 
                                 type="radio" 
                                 name="sexo" 
-                                id="sexo"        
+                                id="sexo"  
+                                value="Otro"      
                                 required
                             />
                             <label for="sexo">Otro</label>
@@ -106,6 +108,7 @@
                                 class="form-control"                           
                             />
                         </div>
+                        {{!-- 
                         !--}}
                         <div class="text-center">
 
