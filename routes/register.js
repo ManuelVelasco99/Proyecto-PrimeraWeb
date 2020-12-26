@@ -3,6 +3,7 @@ const router = express.Router();
 const {register : registro}  = require('../services/registro');
 const showView = (req, res) => res.render("register")
 const {update : validarCorreo} = require('../models/usuarios');
+const {get : getNombreUsuario} = require('../models/usuarios')
 const  create = async (req, res) =>{
     try{
         const {body: usuario} = req;
@@ -23,7 +24,9 @@ const verify = async (req, res) => {
         const {insertId} = await validarCorreo({habilitado : true},uid);
         console.log(insertId);
         //const nombreUsuario="manolete";
-        res.render("verify",{message : insertId});
+        const [{nombreUsuario}] = await getNombreUsuario(uid);
+        console.log(nombreUsuario);
+        res.render("verify",{message : nombreUsuario});
     } catch(e){
         console.log(e);
     }
