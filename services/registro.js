@@ -42,7 +42,7 @@ const register = async ({
             message: `
             <h2>Gracias por registrarte ${nombre} ${apellido}</h2>
             <h3>No olvides verificar tu cuenta para seguir </h3>
-            <a href="http://${process.env.URL_SERVER}:${process.env.PORT}/registro/verify?uid=${uid}">Enlace mágico </a>
+            <a href="http://${process.env.URL_SERVER}:${process.env.PORT}/register/verify?uid=${uid}">Enlace mágico </a>
             `,
         };
        await send(mailObject);
