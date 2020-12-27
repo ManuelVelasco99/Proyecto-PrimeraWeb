@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const {register : registro}  = require('../services/registro');
-const showView = (req, res) => res.render("register")
 const {update : validarCorreo} = require('../models/usuarios');
 const {get : getNombreUsuario} = require('../models/usuarios')
+
+const showView = (req, res) => res.render("register");
 const  create = async (req, res) =>{
     try{
         const {body: usuario} = req;
@@ -32,7 +33,6 @@ const verify = async (req, res) => {
     }
 
 };
-
 
 router.get("/", showView);
 router.post("/create", create);
