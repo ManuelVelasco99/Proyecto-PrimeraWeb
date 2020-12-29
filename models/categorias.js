@@ -24,4 +24,16 @@ const get = async (idCategoria) =>{
     }
 };
 
-module.exports = { create, get };
+const update = async(idCategoria,obj) =>{
+    //Si obj llega vacio se elimina la fila (borrado lógico).
+    try{
+        if (obj == undefined) obj={eliminado:1};
+        const query = "UPDATE ?? SET ? WHERE idCategoria=?";
+        const params = [T_CATEGORIAS,obj,idCategoria];
+        return await pool.query(query,params);
+    }catch(e){
+        console.log(e);
+    }
+};
+
+module.exports = { create, get, update };
