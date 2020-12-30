@@ -1,0 +1,87 @@
+<div class="container">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-3" data-toggle="modal" data-target="#nuevoModal">
+  Nuevo producto
+</button>
+
+    <div class="row mt-3">
+        <div class="col">
+            <h2>Productos</h2>
+            <table class="table table-hover text-center">
+                <thead>
+                    <th>ID</th>
+                    <th>IdCategoria</th>
+                    <th>Descripcion</th>
+                    <th>Imagen</th>
+                    <th>Stock</th>
+                </thead>
+                <tbody>
+                    {{#each productos}}
+                    <tr>
+                        <td>{{idProducto}}</td>
+                        <td>{{idCategoria}}</td>
+                        <td>{{descripcion}}</td>
+                        <td><img src="/images/fa9415c4-35a8-46f0-b4b2-24865b3f3368.jpeg" width="50px" alt="jblTornado"></td>
+                        <th>
+                            <a href="/admin/productos/edit?idCategoria={{idCategoria}}">
+                                <button class="btn btn-primary" type="button">
+                                    Editar 
+                                </button>     
+                            </a>
+                        </th>
+                        <th>
+                            <a href="/admin/productos/delete?idCategoria={{idCategoria}}">
+                                <button class="btn btn-danger" type="button" onclick="return confirm('Seguro que desea eliminar la categoria {{descripcion}}')">
+                                    Eliminar 
+                                </button>     
+                            </a>
+                        </th>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Nuevo -->
+<div class="modal fade" id="nuevoModal" tabindex="-1" aria-labelledby="nuevoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nuevoModalLabel">Nuevo producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/productos/create" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="idCategoria">Categoría *</label>
+                        <select name="idCategoria" id="idCategoria" class="form-control" required>
+                            <option selected>Choose...</option>
+                            {{#each categorias}}
+                                <option value={{idCategoria}}>{{descripcion}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción *</label>
+                        <input type="text" class="form-control" placeholder="Descripción" name="descripcion" aria-label="descripcion" aria-describedby="basic-addon1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imagen">Imagen *</label>
+                        <input type="file" class="form-control-file" id="imagen" name="imagen" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">Stock *</label>
+                        <input type="number" required placeholder="Stock" name="stock" class="form-control">
+                    </div>                   
+                    <button class="btn btn-primary btn-block">Guardar</button>
+                </form>
+            </div>
+        <div class="modal-footer">
+    </div>
+</div>
+
+
