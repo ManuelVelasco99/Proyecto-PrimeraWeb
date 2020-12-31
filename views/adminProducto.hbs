@@ -1,0 +1,65 @@
+<section class="container mt-3 mb-5" name="editarProducto">
+            <h2 class="text-center">Editar Producto</h2>
+            <div class="row justify-content-center mt-3">
+                <div class="col-6">
+                    <form enctype="multipart/form-data" action="/admin/productos/update?idProducto={{idProducto}}" method="post">
+                        <div class="form-group">
+                            <label for="idProducto">Id</label>
+                            <input 
+                                type="text" 
+                                name="idProducto" 
+                                id="idCategoria"
+                                value="{{idProducto}}"
+                                class="form-control"
+                                readonly
+                                                           
+                            />
+                        </div>
+                        <div class="form-group">
+                        <label for="idCategoria">Categoría</label>
+                        <select name="idCategoria" id="idCategoria" class="form-control" >                          
+                            <option selected value={{idCategoria}}>Cambiar categoria...</option>
+                            {{#each categorias}}
+                            <option value={{idCategoria}}>{{descripcion}}</option>                           
+                            {{/each}}
+                        </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <input 
+                                type="text" 
+                                name="descripcion" 
+                                id="descripcion"
+                                class="form-control"
+                                value="{{descripcion}}"
+                                                           
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen">Imagen</label>
+                            <input type="file" class="form-control-file" id="imagen" name="imagen">
+                            <img src="/images/{{imagen}}" width="150px" class="mt-1" alt="">
+                        </div>
+                        <div class="form-group">
+                            <label for="stock">Stock</label>
+                            <input 
+                                type="number" 
+                                name="stock" 
+                                id="stock"
+                                class="form-control"
+                                min="0"
+                                value="{{stock}}"                                                        
+                            />
+                        </div>
+                        <div class="form-group">
+                            <label for="valor">Precio</label>
+                            <input type="number" step="0.01" min="0" required placeholder="Valor" name="valor" class="form-control" value="{{valor}}">
+                        </div> 
+                        <div class="text-center">
+                            <button type="sumbit" class="btn btn-primary btn-block mt-2">Actualizar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <p>{{message}}</p>

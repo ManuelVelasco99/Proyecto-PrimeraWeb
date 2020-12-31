@@ -27,6 +27,7 @@ const saveFile = (
   }
 };
 
+
 const imgFile = (file) => saveFile(file, allowExtension);
 
-module.exports = { imgFile };
+module.exports = { imgFile , deleteTemp };

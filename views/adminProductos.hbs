@@ -14,6 +14,9 @@
                     <th>Descripcion</th>
                     <th>Imagen</th>
                     <th>Stock</th>
+                    <th>Precio</th>
+                    <th></th>
+                    <th></th>
                 </thead>
                 <tbody>
                     {{#each productos}}
@@ -21,17 +24,19 @@
                         <td>{{idProducto}}</td>
                         <td>{{idCategoria}}</td>
                         <td>{{descripcion}}</td>
-                        <td><img src="/images/fa9415c4-35a8-46f0-b4b2-24865b3f3368.jpeg" width="50px" alt="jblTornado"></td>
+                        <td><img src="/images/{{imagen}}" width="60px" height="60px" alt="imagen del producto"></td>
+                        <td>{{stock}}</td>
+                        <td>${{valor}}</td>
                         <th>
-                            <a href="/admin/productos/edit?idCategoria={{idCategoria}}">
+                            <a href="/admin/productos/edit?idProducto={{idProducto}}">
                                 <button class="btn btn-primary" type="button">
                                     Editar 
                                 </button>     
                             </a>
                         </th>
                         <th>
-                            <a href="/admin/productos/delete?idCategoria={{idCategoria}}">
-                                <button class="btn btn-danger" type="button" onclick="return confirm('Seguro que desea eliminar la categoria {{descripcion}}')">
+                            <a href="/admin/productos/delete?idProducto={{idProducto}}">
+                                <button class="btn btn-danger" type="button" onclick="return confirm('Seguro que desea eliminar el producto {{descripcion}}')">
                                     Eliminar 
                                 </button>     
                             </a>
@@ -75,8 +80,12 @@
                     </div>
                     <div class="form-group">
                         <label for="stock">Stock *</label>
-                        <input type="number" required placeholder="Stock" name="stock" class="form-control">
-                    </div>                   
+                        <input type="number" min="0" required placeholder="Stock" name="stock" class="form-control">
+                    </div>  
+                    <div class="form-group">
+                        <label for="valor">Precio *</label>
+                        <input type="number" step="0.01" min="0" required placeholder="Valor" name="valor" class="form-control">
+                    </div>                 
                     <button class="btn btn-primary btn-block">Guardar</button>
                 </form>
             </div>
