@@ -1,4 +1,5 @@
 const { post } = require("../app");
+const { authAdmin } = require("../middlewares/authAdmin");
 const { query } = require("./../utils/db");
 const pool = require("./../utils/db");
 const T_USUARIOS = "usuarios";
@@ -43,4 +44,14 @@ const auth = async({nombreUsuario,password}) =>{
   }
 };
 
-module.exports = {create,update,get, auth};
+const admin = async(idUsuario) =>{
+  try{
+    const query ="SELECT idUsuario FROM ?? WHERE idUsuario=? AND admin=1";
+    const params = [T_USUARIOS,idUsuario];
+    return await pool.query(query,params);
+  }catch(e){
+    console.log(e);
+  }
+}
+
+module.exports = {create,update,get, auth, admin};

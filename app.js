@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const { authAdmin } = require("./middlewares/authAdmin");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -44,8 +45,8 @@ app.use('/register', registerRouter);
 app.use('/login',loginRouter);
 
 //ADMIN
-app.use('/admin/categorias', adminCategoriasRouter);
-app.use('/admin/productos', adminProductosRouter);
+app.use('/admin/categorias',authAdmin, adminCategoriasRouter);
+app.use('/admin/productos',authAdmin, adminProductosRouter);
 
 
 // catch 404 and forward to error handler
