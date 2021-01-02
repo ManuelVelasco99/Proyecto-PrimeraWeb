@@ -6,9 +6,11 @@ var logger = require('morgan');
 const dotenv = require("dotenv");
 dotenv.config();
 
+const session = require("express-session");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 //ADMIN
 const adminCategoriasRouter = require('./routes/admin/categorias');
 const adminProductosRouter = require('./routes/admin/productos');
@@ -25,11 +27,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: process.env.SECRET_SESSION,
+    cookie: { maxAge: null },
+    resave: true,
+    saveUninitialized: false,
+  })
+);
+
 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/register', registerRouter);
+app.use('/login',loginRouter);
 
 //ADMIN
 app.use('/admin/categorias', adminCategoriasRouter);

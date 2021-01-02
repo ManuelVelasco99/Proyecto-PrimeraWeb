@@ -4,7 +4,7 @@ const {register : registro}  = require('../services/registro');
 const {update : validarCorreo} = require('../models/usuarios');
 const {get : getNombreUsuario} = require('../models/usuarios')
 
-const showView = (req, res) => res.render("register");
+const showView = (req, res) => {console.log(req.session.idUser); res.render("register");}
 const  create = async (req, res) =>{
     try{
         const {body: usuario} = req;

@@ -1,3 +1,5 @@
+const { post } = require("../app");
+const { query } = require("./../utils/db");
 const pool = require("./../utils/db");
 const T_USUARIOS = "usuarios";
 
@@ -31,4 +33,14 @@ const update = async(obj,confirmaciónCorreo,id) =>{
   }
 };
 
-module.exports = {create,update,get};
+const auth = async({nombreUsuario,password}) =>{
+  try{
+    const query = "SELECT idUsuario FROM ?? WHERE nombreUsuario=? AND password=?";
+    const params = [T_USUARIOS,nombreUsuario,password];
+    return await pool.query(query,params);
+  }catch(e){
+    console.log(e);
+  }
+};
+
+module.exports = {create,update,get, auth};
