@@ -19,7 +19,7 @@ const productos = async (req,res) =>{
         const categorias = await getCategorias();
         const productos = await getProductos();
         console.log(categorias, productos);
-        res.render("adminProductos",{categorias,productos});
+        res.render("adminProductos",{categorias,productos,title:"Productos"});
 
     }catch(e){
         console.log(e);
@@ -66,7 +66,7 @@ const editarProducto = async(req,res) =>{
         let [{ idCategoria, descripcion, imagen, stock, valor, idPrecio}] = productos;
         
         console.log({ idCategoria, descripcion, imagen, stock});
-        res.render("adminProducto",{idProducto, idCategoria,descripcion,descripcion, imagen,stock,categorias,valor,idPrecio});
+        res.render("adminProducto",{idProducto, idCategoria,descripcion,descripcion, imagen,stock,categorias,valor,idPrecio,title:"Editar producto"});
         
     }catch(e){
         console.log(e);
@@ -86,7 +86,7 @@ const actualizarProducto = async(req , res) =>{
             req.body.imagen = imagen; //si se selecciona una imagen agrega al objeto el nombre de la misma para ser insertado en la db
             await updateProducto(req.body.idProducto,{idCategoria,imagen,descripcion,stock});
             eliminarImagen(`./public/images/${imagenAnterior}`); //luego de insertar la imagen nueva elimina la anterior.
-            res.redirect("/admin/productos/all");
+            res.redirect("/admin/productos/all",{title:"Productos"});
         };
         await updateProducto(idProducto,{idCategoria,descripcion,stock});
         if (valor != valorPred){

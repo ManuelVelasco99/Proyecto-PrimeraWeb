@@ -1,3 +1,4 @@
+const { query } = require("express");
 const pool = require("./../utils/db");
 const T_PRODUCTOS = "productos";
 T_PRECIOS = "preciosProducto"
@@ -13,12 +14,26 @@ const create = async (obj) =>{
     }
 };
 
-const get = async (idProducto) =>{
+const get = async (idProducto,idCategoria) =>{
     try{
         var query;
+        console.log(idCategoria,idProducto);
         if (idProducto == undefined) {query = "SELECT p.idProducto, p.idCategoria, p.descripcion, imagen, stock, valor, idPrecio, cat.descripcion as descripcionCat FROM productos p INNER JOIN preciosProducto pp on p.idProducto = pp.idProducto INNER JOIN categorias cat on p.idCategoria=cat.idCategoria WHERE p.eliminado=false AND hasta IS null"} else 
             {query =   "SELECT p.idProducto, idCategoria, descripcion, imagen, stock, valor, idPrecio FROM productos p INNER JOIN preciosProducto pp on p.idProducto = pp.idProducto WHERE eliminado=false AND hasta IS null AND p.idProducto=?"};
         const params = [idProducto];
+        if (idCategoria != undefined){
+            query=`SELECT p.idProducto, p.descripcion, imagen, stock, valor, idPrecio, cat.descripcion as descripcionCat FROM productos p INNER JOIN preciosProducto pp on p.idProducto = pp.idProducto INNER JOIN categorias cat on p.idCategoria=cat.idCategoria WHERE p.eliminado=false AND p.idCategoria=${idCategoria} AND hasta IS null`
+        }
+        return await pool.query(query,params);
+    }catch(e){
+        console.log(e);
+    }
+};
+
+const getDescPar = async (descripcion) =>{
+    try{
+        const query = "SELECT p.idProducto, p.idCategoria, p.descripcion, imagen, stock, valor, idPrecio, cat.descripcion as descripcionCat FROM productos p INNER JOIN preciosProducto pp on p.idProducto = pp.idProducto INNER JOIN categorias cat on p.idCategoria=cat.idCategoria WHERE p.eliminado=false AND hasta IS null AND p.descripcion LIKE ?";
+        const params = [`%${descripcion}%`];
         return await pool.query(query,params);
     }catch(e){
         console.log(e);
@@ -37,4 +52,4 @@ const update = async(idProducto,obj) =>{
     }
 };
 
-module.exports = { create, get, update };
+module.exports = { create, get, update,getDescPar };

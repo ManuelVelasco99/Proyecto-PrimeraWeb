@@ -7,7 +7,7 @@ const categorias = async (req, res) =>{
     try{   
         const categorias = await get();
         console.log(categorias);
-        res.render("adminCategorias",{categorias});
+        res.render("adminCategorias",{categorias,title:"Categorias"});
     } catch(e){
         console.log(e);
     }
@@ -20,7 +20,7 @@ const nuevaCategoria = async(req,res) =>{
         await crearCategoria(cate);
         const categorias = await get();
         console.log(categorias);
-        res.render("adminCategorias",{categorias});
+        res.redirect("/admin/categorias/all");
     }catch(e){
         console.log(e);
     }
@@ -43,7 +43,7 @@ const editarCategoria = async(req,res) =>{
         console.log(req.query);
         let {idCategoria} = req.query;
         let [{descripcion}] = await get(idCategoria);
-        res.render("adminCategoria",{idCategoria,descripcion});
+        res.render("adminCategoria",{idCategoria,descripcion,title:"Editar categoria"});
         
     }catch(e){
         console.log(e);

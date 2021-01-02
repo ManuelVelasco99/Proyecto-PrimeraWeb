@@ -4,7 +4,7 @@ const {register : registro}  = require('../services/registro');
 const {update : validarCorreo} = require('../models/usuarios');
 const {get : getNombreUsuario} = require('../models/usuarios')
 
-const showView = (req, res) => {console.log(req.session.idUser); res.render("register");}
+const showView = (req, res) => {console.log(req.session.idUser); res.render("register",{title:"Registro"})};
 const  create = async (req, res) =>{
     try{
         const {body: usuario} = req;
@@ -27,7 +27,7 @@ const verify = async (req, res) => {
         //const nombreUsuario="manolete";
         const [{nombreUsuario}] = await getNombreUsuario(uid);
         console.log(nombreUsuario);
-        res.render("verify",{message : nombreUsuario});
+        res.render("verify",{message : nombreUsuario, title:"Cuenta verificada"});
     } catch(e){
         console.log(e);
     }
