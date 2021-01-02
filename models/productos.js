@@ -16,7 +16,7 @@ const create = async (obj) =>{
 const get = async (idProducto) =>{
     try{
         var query;
-        if (idProducto == undefined) {query = "SELECT p.idProducto, idCategoria, descripcion, imagen, stock, valor FROM productos p INNER JOIN preciosProducto pp on p.idProducto = pp.idProducto WHERE eliminado=false AND hasta IS null"} else 
+        if (idProducto == undefined) {query = "SELECT p.idProducto, p.idCategoria, p.descripcion, imagen, stock, valor, idPrecio, cat.descripcion as descripcionCat FROM productos p INNER JOIN preciosProducto pp on p.idProducto = pp.idProducto INNER JOIN categorias cat on p.idCategoria=cat.idCategoria WHERE p.eliminado=false AND hasta IS null"} else 
             {query =   "SELECT p.idProducto, idCategoria, descripcion, imagen, stock, valor, idPrecio FROM productos p INNER JOIN preciosProducto pp on p.idProducto = pp.idProducto WHERE eliminado=false AND hasta IS null AND p.idProducto=?"};
         const params = [idProducto];
         return await pool.query(query,params);

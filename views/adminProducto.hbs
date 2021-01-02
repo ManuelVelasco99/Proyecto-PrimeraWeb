@@ -54,7 +54,13 @@
                         <div class="form-group">
                             <label for="valor">Precio</label>
                             <input type="number" step="0.01" min="0" required placeholder="Valor" name="valor" class="form-control" value="{{valor}}">
-                        </div> 
+                        </div>
+                        <div class="form-group">
+                            <input type="number" step="0.01" min="0" required placeholder="Valor" name="valorPred" class="form-control" value="{{valor}}" hidden>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required placeholder="Valor" name="idPrecio" class="form-control" value="{{idPrecio}}" hidden>
+                        </div>   
                         <div class="text-center">
                             <button type="sumbit" class="btn btn-primary btn-block mt-2">Actualizar</button>
                         </div>

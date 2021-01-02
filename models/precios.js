@@ -22,10 +22,10 @@ const get = async (idProducto,time) =>{
     }
 };
 
-const update = async(idPrecio) =>{
+const update = async(idPrecio) =>{ //Setea el campo hasta con el tiempo actual 
     try{
         const query = "UPDATE ?? SET hasta=CURRENT_TIMESTAMP() WHERE idPrecio=?";
-        const params = [T_PRECIOS,idProducto];
+        const params = [T_PRECIOS,idPrecio];
         return await pool.query(query,params);
     }catch(e){
         console.log(e);

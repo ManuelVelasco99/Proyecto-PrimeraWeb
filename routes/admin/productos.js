@@ -8,7 +8,7 @@ const {
     update : updateProducto
 } = require("./../../models/productos");
 const { get: getCategorias} = require("./../../models/categorias");
-const {create : createPrecio} = require("./../../models/precios")
+const {create : createPrecio, update : updatePrecio} = require("./../../models/precios")
 const multer = require("multer"); // npm i multer
 const config = { dest: `./public/tmp` };
 const upload = multer(config);
@@ -63,10 +63,10 @@ const editarProducto = async(req,res) =>{
         let {idProducto} = req.query;
         let productos = await getProductos(idProducto);
         console.log(productos);
-        let [{ idCategoria, descripcion, imagen, stock, valor}] = productos;
+        let [{ idCategoria, descripcion, imagen, stock, valor, idPrecio}] = productos;
         
         console.log({ idCategoria, descripcion, imagen, stock});
-        res.render("adminProducto",{idProducto, idCategoria,descripcion,descripcion, imagen,stock,categorias,valor});
+        res.render("adminProducto",{idProducto, idCategoria,descripcion,descripcion, imagen,stock,categorias,valor,idPrecio});
         
     }catch(e){
         console.log(e);
@@ -78,7 +78,7 @@ const actualizarProducto = async(req , res) =>{
         console.log(req.body,req.file,req.query.idProducto);
         let [productos] = await getProductos(req.query.idProducto);
         let {imagen : imagenAnterior} = productos;
-        let {idProducto,idCategoria,descripcion,stock,valor} = req.body;
+        let {idProducto,idCategoria,descripcion,stock,valor,valorPred,idPrecio} = req.body;
         
         console.log(stock,descripcion);
         if (req.file != undefined) {
@@ -88,8 +88,11 @@ const actualizarProducto = async(req , res) =>{
             eliminarImagen(`./public/images/${imagenAnterior}`); //luego de insertar la imagen nueva elimina la anterior.
             res.redirect("/admin/productos/all");
         };
-        await updateProducto(req.body.idProducto,{idCategoria,descripcion,stock});
-        val
+        await updateProducto(idProducto,{idCategoria,descripcion,stock});
+        if (valor != valorPred){
+            await updatePrecio(idPrecio);
+            await createPrecio({idProducto,valor});
+        };
         res.redirect("/admin/productos/all");
     }catch(e){
         console.log(e);
