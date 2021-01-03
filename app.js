@@ -14,7 +14,8 @@ const registerRouter = require('./routes/register');
 const logoutRouter = require('./routes/logout')
 const loginRouter = require('./routes/login');
 const carritoRouter = require('./routes/carrito');
-const productoRouter = require('./routes/producto');
+const productoRouter = require('./routes/producto');  
+const buyRouter = require('./routes/buy');
 
 
 //ADMIN
@@ -51,6 +52,7 @@ app.use('/register', registerRouter);
 app.use('/login',loginRouter);
 app.use('/carrito',carritoRouter);
 app.use('/producto',productoRouter);
+app.use('/buy',buyRouter);
 
 //ADMIN
 app.use('/admin/categorias',authAdmin, adminCategoriasRouter);
