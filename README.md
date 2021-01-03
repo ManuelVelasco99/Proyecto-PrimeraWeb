@@ -4,6 +4,7 @@ Este proyecto pertenece al curso Programador web inicial que dicta la UTN BA. En
 * NodeJs
 * Framework Express
 * MySql
+* Handlebars
 ## Iniciando el proyecto
 Para comenzar deberemos escribir en la consola de node, parados en la raíz del proyecto, lo siguiente: 
 
