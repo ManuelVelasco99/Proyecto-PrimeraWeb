@@ -13,7 +13,7 @@ const login = async (req,res) => {
         const [{idUsuario}]=result;
         //console.log(idUsuario);
         req.session.idUser = idUsuario; // Variable superglobal de sessión.
-        res.render("index",{message:"Ingreso exitoso"});
+        res.redirect("/");
 
     }catch(e){
         console.log(e);

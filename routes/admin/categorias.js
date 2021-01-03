@@ -1,13 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const {get,create : crearCategoria, update : deleteCat, update} = require('../../models/categorias');
+const {logueado,admin} = require("../../utils/session");
 
 
 const categorias = async (req, res) =>{
     try{   
+        if(req.session.idUser == undefined) res.redirect("/login")
+        const log = await logueado(req.session.idUser);
+        const adm = await admin(req.session.idUser);
         const categorias = await get();
         console.log(categorias);
-        res.render("adminCategorias",{categorias,title:"Categorias"});
+        res.render("adminCategorias",{categorias,title:"Categorias",log,adm});
     } catch(e){
         console.log(e);
     }
@@ -40,6 +44,8 @@ const borrarCategoria = async(req,res) =>{
 
 const editarCategoria = async(req,res) =>{
     try{
+        const log = await logueado(req.session.idUser);
+        const adm = await admin(req.session.idUser);
         console.log(req.query);
         let {idCategoria} = req.query;
         let [{descripcion}] = await get(idCategoria);

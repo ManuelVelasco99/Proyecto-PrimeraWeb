@@ -1,0 +1,45 @@
+<section class="container mt-3 mb-5" name="editarProducto">
+
+            <div class="row justify-content-center mt-3">
+                <div class="col-4">
+                    <img src="/images/{{imagen}}" height="400" width="400" class="mt-5  img-thumbnail" alt="">
+                </div>
+                <div class="col-2"></div>
+                <div class="col-4">
+                    
+                        <div class="mt-5">
+                            <h2>{{descripcion}}</h2>
+                        </div>
+                        <div class="">
+                        <h2>${{valor}}</h2>
+                        </div>
+                        <div class="">
+                            <h5>{{stock}} disponibles</h5>
+                        </div>
+                        <form action="/carrito/add?idProducto={{idProducto}}" method="POST">
+                        <div class="form-group">
+                            <h3>Cantidad <span class="text-danger">*</span></h3>
+                            <input 
+                                type="number" 
+                                name="cantidad" 
+                                id="stock"
+                                class="form-control"
+                                placeholder="0"
+                                min="1"
+                                max="{{stock}}"
+                                required                                                       
+                            />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required placeholder="Valor" name="idPrecio" class="form-control" value="{{idPrecio}}" hidden>
+                        </div>   
+                        <div class="text-center">
+                            
+                            <button type="sumbit" class="btn btn-primary btn-block mt-2">Añadir al carrito</button>
+                            
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>

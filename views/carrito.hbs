@@ -1,0 +1,43 @@
+<div class="container">  
+    <div class="row mt-3">
+            <div class="col">
+                <h2>Carrito</h2>
+                <table class="table table-hover text-center">
+                    <thead>
+                        <th>Descripcion</th>
+                        <th>Imagen</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                        {{#each carrito}}
+                        <tr>
+                            <td>{{descripcion}}</td>
+                            <td><img src="/images/{{imagen}}" width="60px" height="60px" alt="imagen del producto"></td>
+                            <td>{{cantidad}}</td>
+                            <td>${{valor}}</td>
+                            
+
+                        <th>
+                            <a href="/carrito/delete?idLineaPedido={{idLineaPedido}}">
+                                <button class="btn btn-danger" type="button" onclick="return confirm('Seguro que desea eliminar del carrito el producto {{descripcion}}')">
+                                    Eliminar 
+                                </button>     
+                            </a>
+                        </th>
+                        </tr>
+                        {{/each}}
+                        <tr>    
+                            <th></th>
+                            <th></th>
+                            <th>Total</th>
+                            <th>${{total}}</th>
+                            <th><button class="btn btn-success">Comprar</button></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

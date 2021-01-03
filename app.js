@@ -11,7 +11,12 @@ const session = require("express-session");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const registerRouter = require('./routes/register');
+const logoutRouter = require('./routes/logout')
 const loginRouter = require('./routes/login');
+const carritoRouter = require('./routes/carrito');
+const productoRouter = require('./routes/producto');
+
+
 //ADMIN
 const adminCategoriasRouter = require('./routes/admin/categorias');
 const adminProductosRouter = require('./routes/admin/productos');
@@ -40,9 +45,12 @@ app.use(
 
 
 app.use('/', indexRouter);
+app.use('/logout',logoutRouter);
 app.use('/users', usersRouter);
 app.use('/register', registerRouter);
 app.use('/login',loginRouter);
+app.use('/carrito',carritoRouter);
+app.use('/producto',productoRouter);
 
 //ADMIN
 app.use('/admin/categorias',authAdmin, adminCategoriasRouter);

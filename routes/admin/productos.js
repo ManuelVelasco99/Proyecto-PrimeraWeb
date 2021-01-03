@@ -13,13 +13,16 @@ const multer = require("multer"); // npm i multer
 const config = { dest: `./public/tmp` };
 const upload = multer(config);
 const { imgFile ,deleteTemp : eliminarImagen } = require("./../../utils/fileHandler");
+const {logueado,admin} = require("../../utils/session");
 
 const productos = async (req,res) =>{
     try{
+        const log = await logueado(req.session.idUser);
+        const adm = await admin(req.session.idUser);
         const categorias = await getCategorias();
         const productos = await getProductos();
         console.log(categorias, productos);
-        res.render("adminProductos",{categorias,productos,title:"Productos"});
+        res.render("adminProductos",{categorias,productos,title:"Productos",log,adm});
 
     }catch(e){
         console.log(e);
