@@ -8,7 +8,7 @@ const T_PRECIOS = "preciosProducto";
 
 const crearCarrito = async (idUsuario) =>{
     try{
-        const query = `INSERT INTO ?? SET ??`;
+        const query = `INSERT INTO ?? SET idUsuario=${idUsuario}`;
         const params = [T_PEDIDOS,idUsuario];
         return await pool.query(query,params);
 
@@ -42,6 +42,17 @@ const buscarCarrito = async (id) =>{
 };
 //obj.fecha="CURRENT_TIME()";
 
+const cerrarPedido = async(idPedido, direccionEnvio,factura) => {
+    try{
+        const query = `UPDATE ?? SET fecha=CURRENT_TIME(), direccionEnvio='${direccionEnvio}',factura='${factura}' WHERE idPedido=${idPedido}`;
+        const params =[T_PEDIDOS];
+        return await pool.query(query,params);
+
+    }catch(e){
+        console.log(e)
+    }
+};
+
 const crearLinea = async(obj) =>{ //idproducto , idpedido cantidad
     try{
         const query = "INSERT INTO ?? SET ?";
@@ -63,4 +74,4 @@ const eliminarLinea = async(id) =>{
     }
 };
 
-module.exports = { crearCarrito,buscarCarrito,eliminarLinea, crearLinea,buscarPedido };
+module.exports = { crearCarrito,buscarCarrito,eliminarLinea, crearLinea,buscarPedido,cerrarPedido };

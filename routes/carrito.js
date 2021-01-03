@@ -11,9 +11,10 @@ const showCarrito = async(req,res) =>{
         //console.log(log);
         if (!log) res.redirect("/login")
         else{
-            var carrito = await buscarPedido(req.session.idUser);
+            const {idUser}=req.session;
+            var carrito = await buscarPedido(idUser);
             console.log(carrito);
-            if (carrito == 0) {await crearCarrito(req.session.idUser); res.redirect("/carrito")}
+            if (carrito == 0) {await crearCarrito(idUser); res.redirect("/carrito")}
             else{
                 carrito = await buscarCarrito(req.session.idUser);
                 var total = 0;
@@ -21,7 +22,8 @@ const showCarrito = async(req,res) =>{
                     carrito.valor=carrito.valor*carrito.cantidad
                     total=total+carrito.valor;
                 });
-                res.render("carrito",{carrito,log,adm,total});
+                if (carrito == 0) vacio=true; else vacio=false;
+                res.render("carrito",{carrito,log,adm,total,vacio});
             };
         };
     }catch(e){

@@ -33,7 +33,12 @@
                             <th></th>
                             <th>Total</th>
                             <th>${{total}}</th>
-                            <th><a href="/buy"><button class="btn btn-success">Comprar</button></a></th>
+                            <th>
+                                {{#if vacio}}     
+                                {{else}}      
+                                    <a href="/buy"><button class="btn btn-success">Comprar</button></a>
+                                {{/if}} 
+                            </th>
                         </tr>
                     </tbody>
                 </table>
